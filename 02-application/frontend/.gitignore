@@ -1,0 +1,9 @@
+node_modules/
+.next/
+out/
+build/
+*.sqlite3
+exports/
+.DS_Store
+*.log
+*.tsbuildinfo
