@@ -1,0 +1,16 @@
+Event ID,Title,Status,Kind,Starts At,Topics,Venue,State,Archived Flag,Embargoed Until,Created At
+1,Cloud Native Summit,announced,flagship,2026-02-27T09:00:00,"cloud,featured",Marina Bay Sands,active,0,,2026-01-21T09:00:00
+2,Rust Beginners Meetup,announced,meetup,2026-02-24T09:00:00,rust,Funan Level 7,active,0,2026-03-07T09:00:00,2026-01-09T09:00:00
+3,Kubernetes Hands-On Workshop,open,conference,2026-03-04T09:00:00,cloud,JustCo Marina One,active,0,,2026-02-18T09:00:00
+4,Intro to Observability,announced,workshop,2026-03-09T09:00:00,sre,Marina Bay Sands,active,0,2026-03-06T09:00:00,2026-02-26T09:00:00
+5,Data Engineering Deep Dive,announced,conference,2026-03-02T09:00:00,data,JustCo Marina One,active,0,,2026-02-21T09:00:00
+6,Legacy Systems Clinic,announced,workshop,2026-03-16T09:00:00,architecture,,active,0,2026-03-12T09:00:00,2025-12-22T09:00:00
+7,Frontend Performance Day,completed,workshop,2026-03-01T09:00:00,frontend,JustCo Marina One,active,0,,2026-02-10T09:00:00
+8,Archived 2024 Roadshow,announced,meetup,2026-03-05T09:00:00,community,Funan Level 7,Archived,1,,2025-12-02T09:00:00
+9,Platform Security Conference,announced,flagship,2026-03-03T09:00:00+00:00,"security,featured",Marina Bay Sands,active,0,,2026-01-28T09:00:00
+10,Analytics Practitioners Forum,announced,conference,,data,,active,0,,2025-12-31T09:00:00
+11,Incident Response Bootcamp,open,flagship,2026-02-28T09:00:00,featured,Funan Level 7,active,0,,2026-02-27T09:00:00
+12,Community Organisers Mixer,announced,meetup,sometime next week,community,,archived,1,,2025-11-02T09:00:00
+13,Contract Law for Speakers,announced,workshop,2026-03-07T09:00:00,legal,Marina Bay Sands,active,0,,2026-02-15T09:00:00
+14,Backup Strategies Meetup,announced,conference,2026-02-21T09:00:00,infra,JustCo Marina One,archived,0,,2026-01-16T09:00:00
+15,Annual Community Offsite,announced,meetup,2026-03-23T09:00:00,"community,featured",,active,0,,2026-02-28T09:00:00
