@@ -7,3 +7,9 @@ exports/
 .DS_Store
 *.log
 *.tsbuildinfo
+
+# Acceptance test output (Playwright UAT skill)
+scratch/
+screenshots_uat/
+test-results/
+playwright-report/

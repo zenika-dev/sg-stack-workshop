@@ -4,7 +4,24 @@ import Database from 'better-sqlite3';
 import { EventRow } from './types';
 
 export const DB_PATH = process.env.EVENTS_DB || 'events.sqlite3';
-export const SEED_NOW = new Date('2026-03-02T09:00:00');
+
+// The seed dates are offsets from this anchor: today at 09:00 local time, or the
+// day given by SEED_DATE (YYYY-MM-DD), e.g. SEED_DATE=2026-03-02 for the original data.
+export function seedAnchor(): Date {
+  const seedDate = process.env.SEED_DATE;
+  if (seedDate) {
+    const anchor = new Date(`${seedDate}T09:00:00`);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(seedDate) || isNaN(anchor.getTime())) {
+      throw new Error(`SEED_DATE must be YYYY-MM-DD, got "${seedDate}"`);
+    }
+    return anchor;
+  }
+  const anchor = new Date();
+  anchor.setHours(9, 0, 0, 0);
+  return anchor;
+}
+
+export const SEED_NOW = seedAnchor();
 
 export const SCHEMA = `
 CREATE TABLE IF NOT EXISTS events (
@@ -43,7 +60,7 @@ function formatIso(d: Date, aware: boolean = false): string {
 export function seedRows(): Array<[
   number, string, string, string, string | null, string | null, string | null, string, number, string | null, string
 ]> {
-  const base = new Date('2026-03-02T09:00:00');
+  const base = seedAnchor();
 
   function rel(days: number, aware: boolean = false): string {
     const d = new Date(base.getTime() + days * 24 * 60 * 60 * 1000);

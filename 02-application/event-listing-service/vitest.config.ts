@@ -6,6 +6,9 @@ export default defineConfig({
     environment: 'happy-dom',
     globals: true,
     fileParallelism: false,
+    env: {
+      EVENTS_DB: 'events.test.sqlite3',
+    },
   },
   resolve: {
     alias: {
