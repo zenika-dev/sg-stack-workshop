@@ -86,7 +86,8 @@ run_asciidoctor \
 
 mkdir -p "$OUTPUT_FOLDER"
 cp "$TARGET/lab-instructions.html" "$OUTPUT_FOLDER/"
-cp -r "$SRC/lab-files" "$OUTPUT_FOLDER/lab-files"
+mkdir -p "$OUTPUT_FOLDER/lab-files"
+cp -r "$SRC/lab-files/." "$OUTPUT_FOLDER/lab-files/"
 copy_slides "$HOME/Downloads/slides-ai-workshop-sg-stack.pdf" "$OUTPUT_FOLDER/"
 
 echo "Files generated in: $OUTPUT_FOLDER"
