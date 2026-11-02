@@ -5,7 +5,7 @@
 
 ## 1. Context
 
-The Event Listing Service lists upcoming tech community events (meetups, workshops, conferences,
+The Event Listing Application lists upcoming tech community events (meetups, workshops, conferences,
 flagship events) ranked by a prominence score. Today, events can only be added or changed by an
 engineer, directly in the database, from a spreadsheet sent by the Events Coordinator. Corrections
 take 2 to 3 days, and nothing checks the data: dates in the wrong format, events with no date or a
@@ -53,7 +53,7 @@ This is a new feature added to the existing listing page, not a new application.
 ## 5. User stories and acceptance criteria
 
 **US-1 — Add an event.** As the Events Coordinator, I want to add an event myself, so that it is published without waiting for an engineer.
-- Given I am on the listing page, when I click "Add event" and save a workshop titled "Testing with Playwright" starting in 3 days with valid data, then the modal closes and the new event is shown as a highlighted card.
+- Given I am on the listing page, when I click "Add event" and save a workshop titled "Intro to Kubernetes" starting in 3 days with valid data, then the modal closes and the new event is shown as a highlighted card.
 
 **US-2 — Correct an event.** As the Events Coordinator, I want to edit an existing event, so that corrections are made immediately.
 - Given the event "Contract Law for Speakers", when I click "Edit" on its card, change its venue to "Funan Level 7" and save, then its card shows the new venue.

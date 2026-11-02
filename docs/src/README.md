@@ -1,7 +1,7 @@
 # AI Workshop with Claude: sg-stack
 
 One lab guide for a 3-hour workshop on AI-driven specs and implementation with the Claude Code CLI in the
-VS Code terminal, on the **Event Listing Service** demo app from
+VS Code terminal, on the **Event Listing Application** demo app from
 [zenika-dev/sg-stack-workshop](https://github.com/zenika-dev/sg-stack-workshop).
 
 | Section | Workspace (VS Code window) | Skills from [Wavez](https://wavez.org) | Time |
