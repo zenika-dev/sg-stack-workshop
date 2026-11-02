@@ -1,7 +1,7 @@
 'use client';
 
 import React, {useState} from 'react';
-import {EventFilters} from '../lib/types';
+import {EventFilters} from '../../shared/types';
 
 interface FilterBarProps {
   filters: EventFilters;

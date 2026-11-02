@@ -96,11 +96,16 @@ events you see in the browser.
 ## The files
 
 - `SPEC.md` — the product spec for how listing order is meant to work.
-- `lib/events.ts` — where the ordering and prominence scores are computed.
-- `lib/db.ts` — SQLite schema and the seed (dated relative to today, or `SEED_DATE`).
-- `components/` — React UI components (`Header.tsx`, `FilterBar.tsx`, `EventList.tsx`, `EventCard.tsx`).
-- `hooks/useEvents.ts` — React hook managing data fetching and filter state.
+- `backend/` — server-only code (guarded by `server-only`; never import it from components or hooks):
+  - `services/events.ts` — business rules: ordering, prominence scores, filtering, summary counts.
+  - `repositories/events.ts` — data access (SQL only).
+  - `db/` — connection, SQLite schema, and the seed (dated relative to today, or `SEED_DATE`).
+- `shared/types.ts` — the API contract types used by both sides.
+- `frontend/` — browser-side code:
+  - `components/` — React UI components (`Header.tsx`, `FilterBar.tsx`, `EventList.tsx`, `EventCard.tsx`).
+  - `hooks/useEvents.ts` — data fetching and filter state.
+  - `api.ts` — fetch wrappers for `/api/*`.
 - `app/page.tsx` — Next.js page assembling the full application.
-- `app/api/` — the Next.js API route handlers.
+- `app/api/` — thin route handlers (controllers): parse the request, call a service, return JSON.
 - `scripts/` — `check.ts` (ranking printout) and `reset-db.ts` (restore the seed data).
 - `tests/` — backend and frontend smoke tests.

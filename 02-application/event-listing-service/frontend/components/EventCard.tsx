@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { RankedEvent } from '../lib/types';
+import { RankedEvent } from '../../shared/types';
 
 interface EventCardProps {
   event: RankedEvent;

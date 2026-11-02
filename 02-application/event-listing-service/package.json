@@ -8,14 +8,15 @@
     "start": "next start",
     "test": "vitest run",
     "test:watch": "vitest",
-    "check": "tsx scripts/check.ts",
-    "db:reset": "tsx scripts/reset-db.ts"
+    "check": "tsx --conditions=react-server scripts/check.ts",
+    "db:reset": "tsx --conditions=react-server scripts/reset-db.ts"
   },
   "dependencies": {
     "better-sqlite3": "^12.11.1",
     "next": "^14.2.13",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^7.0.1",

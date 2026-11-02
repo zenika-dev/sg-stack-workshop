@@ -1,8 +1,9 @@
-import {fetchEvents, initDb, SEED_NOW} from '../lib/db';
-import {buildEventList} from '../lib/events';
+import {initDb, SEED_NOW} from '../backend/db/seed';
+import {findAll} from '../backend/repositories/events';
+import {buildEventList} from '../backend/services/events';
 
 initDb();
-const events = buildEventList(fetchEvents(), {view: 'upcoming'}, 25, SEED_NOW);
+const events = buildEventList(findAll(), {view: 'upcoming'}, 25, SEED_NOW);
 for (const e of events) {
   console.log(`${String(e.score).padStart(4)}  id=${String(e.id).padEnd(3)} ${e.title}`);
 }

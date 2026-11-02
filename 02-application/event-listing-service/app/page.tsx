@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import {useEvents} from '../hooks/useEvents';
-import {Header} from '../components/Header';
-import {FilterBar} from '../components/FilterBar';
-import {EventList} from '../components/EventList';
+import {useEvents} from '../frontend/hooks/useEvents';
+import {Header} from '../frontend/components/Header';
+import {FilterBar} from '../frontend/components/FilterBar';
+import {EventList} from '../frontend/components/EventList';
 
 export default function EventsPage() {
   const {

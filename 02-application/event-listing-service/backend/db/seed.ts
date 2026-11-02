@@ -1,9 +1,7 @@
+import 'server-only';
 import fs from 'fs';
-import path from 'path';
-import Database from 'better-sqlite3';
-import { EventRow } from './types';
-
-export const DB_PATH = process.env.EVENTS_DB || 'events.sqlite3';
+import { connect, DB_PATH } from './connection';
+import { SCHEMA } from './schema';
 
 // The seed dates are offsets from this anchor: today at 09:00 local time, or the
 // day given by SEED_DATE (YYYY-MM-DD), e.g. SEED_DATE=2026-03-02 for the original data.
@@ -22,22 +20,6 @@ export function seedAnchor(): Date {
 }
 
 export const SEED_NOW = seedAnchor();
-
-export const SCHEMA = `
-CREATE TABLE IF NOT EXISTS events (
-    id             INTEGER PRIMARY KEY,
-    title          TEXT NOT NULL,
-    status         TEXT NOT NULL,
-    kind           TEXT NOT NULL,
-    starts_at      TEXT,
-    topics         TEXT,
-    venue          TEXT,
-    state          TEXT NOT NULL DEFAULT 'active',
-    archived       INTEGER NOT NULL DEFAULT 0,
-    embargoed_until TEXT,
-    created_at     TEXT NOT NULL
-);
-`;
 
 function pad(num: number): string {
   return String(num).padStart(2, '0');
@@ -86,14 +68,6 @@ export function seedRows(): Array<[
   ];
 }
 
-export function connect(): Database.Database {
-  const dbDir = path.dirname(DB_PATH);
-  if (dbDir && dbDir !== '.' && !fs.existsSync(dbDir)) {
-    fs.mkdirSync(dbDir, { recursive: true });
-  }
-  return new Database(DB_PATH);
-}
-
 export function initDb(): void {
   if (fs.existsSync(DB_PATH)) {
     try {
@@ -116,14 +90,4 @@ export function initDb(): void {
   });
   insertMany(rows);
   db.close();
-}
-
-export function fetchEvents(): EventRow[] {
-  if (!fs.existsSync(DB_PATH)) {
-    initDb();
-  }
-  const db = connect();
-  const rows = db.prepare('SELECT * FROM events').all() as EventRow[];
-  db.close();
-  return rows;
 }

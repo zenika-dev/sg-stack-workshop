@@ -1,4 +1,6 @@
-import { EventRow, RankedEvent, EventFilters, EventSummary } from './types';
+import 'server-only';
+import { EventRow, RankedEvent, EventFilters, EventSummary, EventPage } from '../../shared/types';
+import { findAll } from '../repositories/events';
 
 export const STARTING_SOON_DAYS = 7;
 
@@ -142,4 +144,24 @@ export function summarise(rows: EventRow[], now?: Date): EventSummary {
   }
 
   return { listed: listedCount, running: runningCount };
+}
+
+export function listEvents(
+  filters: EventFilters,
+  limit: number = 25,
+  offset: number = 0
+): EventPage {
+  const events = buildEventList(findAll(), filters, limit);
+  return {
+    total: events.length,
+    items: events.slice(offset, offset + limit),
+  };
+}
+
+export function getSummary(): EventSummary {
+  return summarise(findAll());
+}
+
+export function listAllForExport(): RankedEvent[] {
+  return buildEventList(findAll(), { view: 'all' }, 1000);
 }

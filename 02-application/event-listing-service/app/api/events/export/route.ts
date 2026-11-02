@@ -1,16 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 import { NextResponse } from 'next/server';
-import { fetchEvents } from '@/lib/db';
-import { buildEventList } from '@/lib/events';
+import { listAllForExport } from '@/backend/services/events';
 
 export const dynamic = 'force-dynamic';
 
 const EXPORT_PATH = 'exports/events.json';
 
 export async function GET() {
-  const rows = fetchEvents();
-  const events = buildEventList(rows, { view: 'all' }, 1000);
+  const events = listAllForExport();
 
   const dir = path.dirname(EXPORT_PATH);
   if (!fs.existsSync(dir)) {
