@@ -158,10 +158,11 @@ sg-stack-workshop/
 │   └── data/events-export.csv        the events currently in the database
 └── 02-application/
     └── event-listing-service/        Sections 3 and 4: the application workspace
-        ├── app/, components/, hooks/   Next.js pages, API routes and React UI
-        ├── lib/                        event ranking and SQLite database
-        ├── tests/                      Vitest tests
-        └── SPEC.md                     the original spec of the listing page
+        ├── backend/                    server-only code: services, repositories, SQLite database
+        ├── frontend/                   browser-side code: React components, hooks, API client
+        ├── shared/                     API contract types used by both sides
+        ├── app/                        Next.js page and thin API route handlers
+        └── tests/                      Vitest tests
 ----
 
 You will open each workspace in its own VS Code window, and install the skills that each one needs.
@@ -250,6 +251,8 @@ image::images/1b-wavez-generate-product-skills.png[align="center",width=700]
 * Check that Claude Code finds the new skills:
 ** Open the integrated terminal (*Terminal > New Terminal*) and run `claude`. Sign in with your Claude account if prompted, and confirm that you trust the folder.
 ** Type `/`: you should see `/product-requirements` and `/dynamic-prototyping` in the list.
+
+NOTE: Always run `claude` from the folder that contains `.claude/skills`: here `01-product-management`, and in Sections 3 and 4 `event-listing-service`. Claude Code only loads the skills of the folder it is started in, so from any other folder the skills do not appear when you type `/`.
 
 === 2.3 Create requirements brief
 
@@ -492,13 +495,15 @@ event-listing-service/
 │       ├── reviewer/           SKILL.md + references/ + scripts/
 │       └── playwright-uat/     SKILL.md + templates/
 ├── app/
-├── lib/
+├── backend/
+├── frontend/
+├── shared/
 └── package.json
 ----
 
 Each skill's `references/architecture.md` holds the rules its plans follow.
 
-* Open a second terminal (`+` icon in the terminal panel) and run `claude`, as in step 2.2: this is your Claude Code terminal. Type `/`: you should see `/backend`, `/frontend`, `/reviewer` and `/playwright-uat` in the list.
+* Open a second terminal (`+` icon in the terminal panel) and run `claude`, as in step 2.2: this is your Claude Code terminal. Make sure it is in the `event-listing-service` folder, otherwise the skills will not appear. Type `/`: you should see `/backend`, `/frontend`, `/reviewer` and `/playwright-uat` in the list.
 
 === 3.3 Hand over the PRD and run a gap analysis
 
@@ -668,11 +673,11 @@ This step is *product management* work, as in Section 2: the outcome is a spec, 
 The Programme squad sent this requirement for the public listing page of this application:
 "Attendees find the public listing page confusing: they do not understand the score shown on each card, what "Running now" means, or why the "Register" button does not register them anywhere. They also tell us that searching by topic or venue does not find the events they expect. Make the page clearer and fix the search, without changing the order in which events are ranked."
 
-Analyse the code (API routes, lib, components, hooks, tests) and SPEC.md, then write docs/specs/listing-page-spec.md with:
-1. Current behaviour: how events are selected, ranked, counted and searched today, in plain English, with file references. Mark every place where the code and SPEC.md disagree.
+Analyse the code (API routes, backend, frontend, shared types, tests), then write docs/specs/listing-page-spec.md with:
+1. Current behaviour: how events are selected, ranked, counted and searched today, in plain English, with file references.
 2. Root causes of the search problem, with file and line references.
 3. Requirements for the change, numbered LP-1, LP-2..., each one traceable to the requirement above. The ranking order must not change.
-4. User stories with acceptance criteria in Given/When/Then format, using real events from the seed data in lib/db.ts.
+4. User stories with acceptance criteria in Given/When/Then format, using real events from the seed data in backend/db/seed.ts.
 5. Out of scope, and open questions for the Programme squad.
 Do not change any code.
 ----
@@ -682,14 +687,14 @@ Do not change any code.
 *Why this prompt?*
 
 * *The squad's requirement, word for word:* the *why* of the change. Every requirement of the spec must trace back to it.
-* *"Analyse the code ... and SPEC.md":* the code is the only reliable description of today's behaviour; `SPEC.md` is the original intent. Where they differ, you decide.
+* *"Analyse the code":* the code is the only reliable description of today's behaviour. Where it is ambiguous, you decide.
 * *File and line references, real seed events:* you can check every claim, and test every acceptance criterion on the application as it is.
 * *"Do not change any code":* the product manager decides before anything changes.
 ====
 
 * Open `docs/specs/listing-page-spec.md` and review it as the product manager:
 ** Do you agree with the root causes? Ask Claude to show you the code if you are not sure.
-** Where the code and `SPEC.md` disagree (for example, should the venue search be an exact match?), the spec must make a decision. Make it, and ask Claude to update the spec.
+** Where the code's behaviour is ambiguous (for example, should the venue search be an exact match?), the spec must make a decision. Make it, and ask Claude to update the spec.
 ** Is every requirement testable? Each one should be covered by at least one acceptance criterion.
 * Commit the spec: it is now the contract for the change.
 

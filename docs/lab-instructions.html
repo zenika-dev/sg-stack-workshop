@@ -1527,10 +1527,11 @@ code, pre {
 │   └── data/events-export.csv        the events currently in the database
 └── 02-application/
     └── event-listing-service/        Sections 3 and 4: the application workspace
-        ├── app/, components/, hooks/   Next.js pages, API routes and React UI
-        ├── lib/                        event ranking and SQLite database
-        ├── tests/                      Vitest tests
-        └── SPEC.md                     the original spec of the listing page</code></pre>
+        ├── backend/                    server-only code: services, repositories, SQLite database
+        ├── frontend/                   browser-side code: React components, hooks, API client
+        ├── shared/                     API contract types used by both sides
+        ├── app/                        Next.js page and thin API route handlers
+        └── tests/                      Vitest tests</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1709,6 +1710,18 @@ npm test</code></pre>
 </div>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Always run <code>claude</code> from the folder that contains <code>.claude/skills</code>: here <code>01-product-management</code>, and in Sections 3 and 4 <code>event-listing-service</code>. Claude Code only loads the skills of the folder it is started in, so from any other folder the skills do not appear when you type <code>/</code>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -2169,7 +2182,9 @@ Add a "Changes since v1" section at the end of the document.</code></pre>
 │       ├── reviewer/           SKILL.md + references/ + scripts/
 │       └── playwright-uat/     SKILL.md + templates/
 ├── app/
-├── lib/
+├── backend/
+├── frontend/
+├── shared/
 └── package.json</code></pre>
 </div>
 </div>
@@ -2179,7 +2194,7 @@ Add a "Changes since v1" section at the end of the document.</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Open a second terminal (<code>+</code> icon in the terminal panel) and run <code>claude</code>, as in step 2.2: this is your Claude Code terminal. Type <code>/</code>: you should see <code>/backend</code>, <code>/frontend</code>, <code>/reviewer</code> and <code>/playwright-uat</code> in the list.</p>
+<p>Open a second terminal (<code>+</code> icon in the terminal panel) and run <code>claude</code>, as in step 2.2: this is your Claude Code terminal. Make sure it is in the <code>event-listing-service</code> folder, otherwise the skills will not appear. Type <code>/</code>: you should see <code>/backend</code>, <code>/frontend</code>, <code>/reviewer</code> and <code>/playwright-uat</code> in the list.</p>
 </li>
 </ul>
 </div>
@@ -2532,11 +2547,11 @@ Do not confuse the <code>reviewer</code> skill with Claude Code&#8217;s built-in
 <pre class="highlight"><code class="language-text" data-lang="text">The Programme squad sent this requirement for the public listing page of this application:
 "Attendees find the public listing page confusing: they do not understand the score shown on each card, what "Running now" means, or why the "Register" button does not register them anywhere. They also tell us that searching by topic or venue does not find the events they expect. Make the page clearer and fix the search, without changing the order in which events are ranked."
 
-Analyse the code (API routes, lib, components, hooks, tests) and SPEC.md, then write docs/specs/listing-page-spec.md with:
-1. Current behaviour: how events are selected, ranked, counted and searched today, in plain English, with file references. Mark every place where the code and SPEC.md disagree.
+Analyse the code (API routes, backend, frontend, shared types, tests), then write docs/specs/listing-page-spec.md with:
+1. Current behaviour: how events are selected, ranked, counted and searched today, in plain English, with file references.
 2. Root causes of the search problem, with file and line references.
 3. Requirements for the change, numbered LP-1, LP-2..., each one traceable to the requirement above. The ranking order must not change.
-4. User stories with acceptance criteria in Given/When/Then format, using real events from the seed data in lib/db.ts.
+4. User stories with acceptance criteria in Given/When/Then format, using real events from the seed data in backend/db/seed.ts.
 5. Out of scope, and open questions for the Programme squad.
 Do not change any code.</code></pre>
 </div>
@@ -2552,7 +2567,7 @@ Do not change any code.</code></pre>
 <p><strong>The squad&#8217;s requirement, word for word:</strong> the <strong>why</strong> of the change. Every requirement of the spec must trace back to it.</p>
 </li>
 <li>
-<p><strong>"Analyse the code &#8230;&#8203; and SPEC.md":</strong> the code is the only reliable description of today&#8217;s behaviour; <code>SPEC.md</code> is the original intent. Where they differ, you decide.</p>
+<p><strong>"Analyse the code":</strong> the code is the only reliable description of today&#8217;s behaviour. Where it is ambiguous, you decide.</p>
 </li>
 <li>
 <p><strong>File and line references, real seed events:</strong> you can check every claim, and test every acceptance criterion on the application as it is.</p>
@@ -2574,7 +2589,7 @@ Do not change any code.</code></pre>
 <p>Do you agree with the root causes? Ask Claude to show you the code if you are not sure.</p>
 </li>
 <li>
-<p>Where the code and <code>SPEC.md</code> disagree (for example, should the venue search be an exact match?), the spec must make a decision. Make it, and ask Claude to update the spec.</p>
+<p>Where the code&#8217;s behaviour is ambiguous (for example, should the venue search be an exact match?), the spec must make a decision. Make it, and ask Claude to update the spec.</p>
 </li>
 <li>
 <p>Is every requirement testable? Each one should be covered by at least one acceptance criterion.</p>
@@ -2765,7 +2780,7 @@ Do not change any code.</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-02 13:59:06 +0800
+Last updated 2026-11-02 14:52:05 +0800
 </div>
 </div>
 </body>

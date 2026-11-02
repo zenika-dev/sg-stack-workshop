@@ -95,7 +95,6 @@ events you see in the browser.
 
 ## The files
 
-- `SPEC.md` — the product spec for how listing order is meant to work.
 - `backend/` — server-only code (guarded by `server-only`; never import it from components or hooks):
   - `services/events.ts` — business rules: ordering, prominence scores, filtering, summary counts.
   - `repositories/events.ts` — data access (SQL only).
