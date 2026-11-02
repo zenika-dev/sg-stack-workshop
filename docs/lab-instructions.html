@@ -2459,6 +2459,18 @@ Do not confuse the <code>reviewer</code> skill with Claude Code&#8217;s built-in
 <div class="paragraph">
 <p>Last, you check the feature the way the Events Coordinator will use it: in a browser, against each acceptance criterion of the PRD. The <code>playwright-uat</code> skill works in two phases: it first writes a test plan for you to review, then runs it in a real browser and produces a Word (<code>.docx</code>) report.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+To run Playwright exploratory testing, where Claude freely browses and probes the application beyond the scripted test cases, you need to use the Playwright MCP server.
+</td>
+</tr>
+</table>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -2810,7 +2822,7 @@ Do not change any code.</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-02 16:53:41 +0800
+Last updated 2026-11-02 17:25:12 +0800
 </div>
 </div>
 </body>
