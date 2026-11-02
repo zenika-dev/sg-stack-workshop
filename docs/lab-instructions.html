@@ -1301,8 +1301,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <ul class="sectlevel2">
 <li><a href="#_2_1_open_the_product_management_workspace">2.1 Open the product management workspace</a></li>
 <li><a href="#_2_2_get_the_product_and_design_skills_from_wavez">2.2 Get the Product and Design skills from Wavez</a></li>
-<li><a href="#_2_3_create_the_requirements_brief">2.3 Create the requirements brief</a></li>
-<li><a href="#_2_4_create_the_prd">2.4 Create the PRD</a></li>
+<li><a href="#_2_3_create_requirements_brief">2.3 Create requirements brief</a></li>
+<li><a href="#_2_4_create_product_requirement_document_prd">2.4 Create Product Requirement Document (PRD)</a></li>
 <li><a href="#_2_5_build_a_dynamic_prototype">2.5 Build a dynamic prototype</a></li>
 <li><a href="#_2_6_get_feedback_and_update_the_prd">2.6 Get feedback and update the PRD</a></li>
 </ul>
@@ -1458,10 +1458,10 @@ code, pre {
 <p><a href="https://nodejs.org/en/download" target="_blank" rel="noopener">Node.js 24 or later</a></p>
 </li>
 <li>
-<p>Visual Studio Code (version 1.140 or later recommended)</p>
+<p><a href="https://code.visualstudio.com/download" target="_blank" rel="noopener">Visual Studio Code</a> (version 1.140 or later recommended)</p>
 </li>
 <li>
-<p>the <strong>Claude Code</strong> command line (CLI). In a terminal, install it with <code>curl -fsSL <a href="https://claude.ai/install.sh" class="bare">https://claude.ai/install.sh</a> | bash</code> (macOS, Linux, WSL) or <code>irm <a href="https://claude.ai/install.ps1" class="bare">https://claude.ai/install.ps1</a> | iex</code> (Windows PowerShell), then check that <code>claude --version</code> works. See <a href="https://code.claude.com/docs/en/setup" target="_blank" rel="noopener">here</a> for more details.</p>
+<p>the <strong>Claude Code</strong> command line (CLI). Run <code>claude --version</code> in a terminal. If the command is not found, install it with <code>curl -fsSL <a href="https://claude.ai/install.sh" class="bare">https://claude.ai/install.sh</a> | bash</code> (macOS, Linux, WSL) or <code>irm <a href="https://claude.ai/install.ps1" class="bare">https://claude.ai/install.ps1</a> | iex</code> (Windows PowerShell). See <a href="https://code.claude.com/docs/en/setup" target="_blank" rel="noopener">here</a> for more details.</p>
 </li>
 <li>
 <p>a <strong>Claude account</strong> (Pro, Max, Team or Enterprise). If you do not have one, please reach out to your instructor.</p>
@@ -1477,7 +1477,7 @@ code, pre {
 <h2 id="_overview">Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Your team has just inherited the <strong>Event Listing Service</strong>: a conference ranking app (Next.js, React, TypeScript, SQLite) that lists upcoming tech events and gives each one a prominence score, depending on the kind of event and when it takes place. Nobody currently on the team wrote it, and nobody has set it up for AI-assisted development yet.</p>
+<p>Your team has just inherited the <strong>Event Listing Application</strong>: a conference ranking app (Next.js, React, TypeScript, SQLite) that lists upcoming tech events and gives each one a prominence score, depending on the kind of event and when it takes place. Nobody currently on the team wrote it, and nobody has set it up for AI-assisted development yet.</p>
 </div>
 <div class="paragraph">
 <p>Two pieces of work are waiting for you: a <strong>new feature</strong> (there is no screen to add or edit events, they are entered directly into the database) and a change to an <strong>existing feature</strong> (the public listing page is confusing, and its search does not find the events attendees expect).</p>
@@ -1575,7 +1575,7 @@ code, pre {
 <div class="ulist">
 <ul>
 <li>
-<p>Open the integrated terminal (<strong>Terminal &gt; New Terminal</strong>) and run:</p>
+<p>Open the integrated terminal (<strong>Terminal &gt; New Terminal</strong>) and run the following commands from the <code>02-application/event-listing-service</code> folder:</p>
 </li>
 </ul>
 </div>
@@ -1625,7 +1625,7 @@ npm test</code></pre>
 <h2 id="_2_specs_event_management_new_feature">2. Specs: event management (new feature)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The engineering team receives a request: <strong>the Events Coordinator wants to add and edit events</strong>. In this section, you wear the <strong>Product Manager</strong> hat: you turn the request into a validated specification (PRD).</p>
+<p>The engineering team receives a request: <strong>the Events Coordinator wants to add and edit events</strong>. In this section, you wear the <strong>Product Manager</strong> hat: you turn the request into a validated specification (Product Requirement Document).</p>
 </div>
 <div class="sect2">
 <h3 id="_2_1_open_the_product_management_workspace">2.1 Open the product management workspace</h3>
@@ -1712,13 +1712,25 @@ npm test</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_2_3_create_the_requirements_brief">2.3 Create the requirements brief</h3>
+<h3 id="_2_3_create_requirements_brief">2.3 Create requirements brief</h3>
 <div class="ulist">
 <ul>
 <li>
 <p>Run <code>/clear</code> to start a new conversation and send:</p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<code>/clear</code> empties Claude&#8217;s memory of the current conversation. Each step starts from a clean context, so earlier prompts and files do not influence the result, and the session stays fast and focused. It also saves tokens, because Claude no longer re-reads the old conversation with every message. Your files on disk are not affected.
+</td>
+</tr>
+</table>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1734,7 +1746,7 @@ Structure:
 6. Open questions: what the notes do not say and the PRD must decide (8 at most)
 
 STAKEHOLDER NOTES
-- Product: the Event Listing Service, a public page listing upcoming tech community events (meetups, workshops, conferences, flagship events), ranked by a prominence score. Our team inherited it; nobody on the team wrote it.
+- Product: the Event Listing Application, a public page listing upcoming tech community events (meetups, workshops, conferences, flagship events), ranked by a prominence score. Our team inherited it; nobody on the team wrote it.
 - User: the Events Coordinator of the Programme squad. Not technical. Manages the events sent by about 40 external organisers.
 - Today there is no screen to add or edit events. The coordinator sends a spreadsheet to an engineer, who inserts the events directly into the database. It takes 2 to 3 days, and every correction (new venue, new date, cancellation) goes through the same loop.
 - Nothing checks the spreadsheet, so mistakes reach the database: dates in the wrong format, events with no date, a date typed as "sometime next week".
@@ -1773,7 +1785,7 @@ STAKEHOLDER NOTES
 </div>
 </div>
 <div class="sect2">
-<h3 id="_2_4_create_the_prd">2.4 Create the PRD</h3>
+<h3 id="_2_4_create_product_requirement_document_prd">2.4 Create Product Requirement Document (PRD)</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1785,7 +1797,7 @@ STAKEHOLDER NOTES
 <div class="content">
 <pre class="highlight"><code class="language-text" data-lang="text">Use the product-requirements skill to create a product requirements document based on the attached brief @01-knowledge/requirements-brief.md
 
-CONTEXT: the Event Listing Service already exists; its listing page is shown in @current-app/listing-page.png. Today, events can only be added or changed directly in the database by an engineer. This is a new feature added to the existing page, not a new application.
+CONTEXT: the Event Listing Application already exists; its listing page is shown in @current-app/listing-page.png. Today, events can only be added or changed directly in the database by an engineer. This is a new feature added to the existing page, not a new application.
 
 EVENT MANAGEMENT: on the existing listing page, an "Add event" button in the page header and an "Edit" button on each event card. Adding and editing happen in a modal with these fields: title, kind, status, start date and time, topics, venue, embargoed until, archived. At least one requirement must describe how invalid data is prevented from being saved, with one validation rule per field that prevents the bad data described in the brief.
 
@@ -1901,7 +1913,7 @@ The functions the rest of the prototype will call are named getEvents, saveEvent
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-text" data-lang="text">Event Listing Service — Add / edit events prototype
+<pre class="highlight"><code class="language-text" data-lang="text">Event Listing Application — Add / edit events prototype
 Build the prototype as 05-dynamic-prototyping/index.html. The file eventStore.js already exists in the same folder. Use its functions for all data and validation.
 
 Current listing page (do not redesign it)
@@ -1961,7 +1973,7 @@ When you are done, give me a short list of every assumption you made that the PR
 <p>Compare the prototype with <code>current-app/listing-page.png</code>. Apart from the new buttons, does the page look the same?</p>
 </li>
 <li>
-<p>Add a workshop titled "Testing with Playwright" starting on 5 March 2026. Does it appear as a highlighted card after saving?</p>
+<p>Add a workshop titled "Intro to Kubernetes" starting on 5 March 2026. Does it appear as a highlighted card after saving?</p>
 </li>
 <li>
 <p>Try to save an event with no start date. Is it refused with a clear message under the field, with the modal still open?</p>
@@ -2075,7 +2087,7 @@ Add a "Changes since v1" section at the end of the document.</code></pre>
 <p>Check that each change in "Changes since v1" traces back to the feedback, an assumption or a test finding.</p>
 </li>
 <li>
-<p>Commit your work (<code>git add .</code> then <code>git commit -m "Event management PRD"</code>). The PRD is ready for the developers.</p>
+<p>If you&#8217;re happy with the output, the PRD is ready to be implemented.</p>
 </li>
 </ul>
 </div>
@@ -2096,7 +2108,7 @@ Add a "Changes since v1" section at the end of the document.</code></pre>
 <p>Go back to the <code>event-listing-service</code> VS Code window from Section 1 (if you closed it, select <strong>File &gt; Open Recent</strong>). Keep the product management window open: you will need its PRD in step 3.3.</p>
 </li>
 <li>
-<p>Check that the application still runs at <a href="http://localhost:3000" class="bare" target="_blank" rel="noopener">http://localhost:3000</a>. If it does not, run <code>npm run dev</code> in the integrated terminal. Keep this terminal running: it is your application terminal. Open a second terminal (<code>+</code> icon in the terminal panel) for the other commands.</p>
+<p>Check that the application still runs at <a href="http://localhost:3000" class="bare" target="_blank" rel="noopener">http://localhost:3000</a>. If it does not, run <code>npm run dev</code> in the integrated terminal. Keep this terminal running: it is your application terminal.</p>
 </li>
 </ul>
 </div>
@@ -2162,12 +2174,12 @@ Add a "Changes since v1" section at the end of the document.</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Each skill&#8217;s <code>references/architecture.md</code> holds the rules its plans follow. For the Node.js <code>backend</code> skill: route handlers in <code>app/api/</code>, business rules in <code>lib/</code>, SQLite queries with bound parameters, Vitest tests.</p>
+<p>Each skill&#8217;s <code>references/architecture.md</code> holds the rules its plans follow.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Open a third terminal (<code>+</code> icon in the terminal panel) and run <code>claude</code>, as in step 2.2: this is your Claude Code terminal. Type <code>/</code>: you should see <code>/backend</code>, <code>/frontend</code>, <code>/reviewer</code> and <code>/playwright-uat</code> in the list.</p>
+<p>Open a second terminal (<code>+</code> icon in the terminal panel) and run <code>claude</code>, as in step 2.2: this is your Claude Code terminal. Type <code>/</code>: you should see <code>/backend</code>, <code>/frontend</code>, <code>/reviewer</code> and <code>/playwright-uat</code> in the list.</p>
 </li>
 </ul>
 </div>
@@ -2177,7 +2189,7 @@ Add a "Changes since v1" section at the end of the document.</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Copy the PRD into the application, from your second terminal:</p>
+<p>Open a third terminal (<code>+</code> icon in the terminal panel) for the other commands, and copy the PRD into the application:</p>
 </li>
 </ul>
 </div>
@@ -2242,7 +2254,7 @@ If you did not finish Section 2, copy the reference PRD <code>event-management-p
 <div class="title">Tip</div>
 </td>
 <td class="content">
-In auto mode, Claude edits files and runs commands on its own, and stops only for actions it judges risky. If auto mode is not in the cycle, choose <strong>accept edits on</strong>: Claude edits files on its own and asks before running commands. If you prefer to approve every change yourself, press <strong>Shift+Tab</strong> until no mode shows (the default mode): Claude asks before each edit or command and shows you what it wants to do, and you accept or reject it. It is slower, but you see every change as it happens.
+In auto mode, Claude edits files and runs commands on its own, and stops only for actions it judges risky. If you prefer to approve every change yourself, press <strong>Shift+Tab</strong> until manual mode: Claude asks before each edit or command and shows you what it wants to do, and you accept or reject it. It is slower, but you see every change as it happens.
 </td>
 </tr>
 </table>
@@ -2308,7 +2320,7 @@ In auto mode, Claude edits files and runs commands on its own, and stops only fo
 <div class="ulist">
 <ul>
 <li>
-<p>Check that the <code><mark>#</mark> Backend Handover</code> block shows <code>PASS</code>, then run <code>npm test</code> in your second terminal.</p>
+<p>Check that the <code><mark>#</mark> Backend Handover</code> block shows <code>PASS</code>, then run <code>npm test</code> in your third terminal.</p>
 </li>
 <li>
 <p>With a curl command from the handover, create an event with no start date. Is it refused with a clear message?</p>
@@ -2753,7 +2765,7 @@ Do not change any code.</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-02 11:24:44 +0800
+Last updated 2026-11-02 13:59:06 +0800
 </div>
 </div>
 </body>
