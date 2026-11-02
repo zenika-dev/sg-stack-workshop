@@ -128,8 +128,8 @@ code, pre {
 
 ** Git. See https://git-scm.com/install/[here,window="_blank"] for more details.
 ** https://nodejs.org/en/download[Node.js 24 or later,window="_blank"]
-** Visual Studio Code (version 1.94 or later)
-** the *Claude Code* extension for VS Code. Install it from the Extensions panel by searching for `Claude Code` (published by Anthropic).
+** Visual Studio Code (version 1.140 or later recommended)
+** the *Claude Code* command line (CLI). In a terminal, install it with `curl -fsSL https://claude.ai/install.sh | bash` (macOS, Linux, WSL) or `irm https://claude.ai/install.ps1 | iex` (Windows PowerShell), then check that `claude --version` works. See https://code.claude.com/docs/en/setup[here,window="_blank"] for more details.
 ** a *Claude account* (Pro, Max, Team or Enterprise). If you do not have one, please reach out to your instructor.
 
 == Overview
@@ -141,9 +141,10 @@ Two pieces of work are waiting for you: a *new feature* (there is no screen to a
 [cols="2,3,3",options="header"]
 |===
 | Section | What you do | Skills
-| *1. Specs* (new feature) | Turn a request into a validated PRD for the event management feature | `product-requirements`, `dynamic-prototyping`
-| *2. Implementation* (new feature) | Implement the PRD, review it and test it | `backend`, `frontend`, `reviewer`, `playwright-uat`
-| *3. Specs + Implementation* (existing feature, *optional*) | Write the spec of the listing page change from the code, then implement and test it with the same flow as Section 2 | Claude Code, then the skills of Section 2
+| *1. Get started* | Clone the repository, run the application and explore its listing page | -
+| *2. Specs* (new feature) | Turn a request into a validated PRD for the event management feature | `product-requirements`, `dynamic-prototyping`
+| *3. Implementation* (new feature) | Implement the PRD, review it and test it | `backend`, `frontend`, `reviewer`, `playwright-uat`
+| *4. Specs + Implementation* (existing feature, *optional*) | Write the spec of the listing page change from the code, then implement and test it with the same flow as Section 3 | Claude Code, then the skills of Section 3
 |===
 
 [discrete]
@@ -152,11 +153,11 @@ Two pieces of work are waiting for you: a *new feature* (there is no screen to a
 [source,text]
 ----
 sg-stack-workshop/
-├── 01-product-management/            Section 1: the product management workspace
+├── 01-product-management/            Section 2: the product management workspace
 │   ├── current-app/                  the listing page today: screenshot, HTML and stylesheet
 │   └── data/events-export.csv        the events currently in the database
 └── 02-application/
-    └── event-listing-service/        Sections 2 and 3: the application workspace
+    └── event-listing-service/        Sections 3 and 4: the application workspace
         ├── app/, components/, hooks/   Next.js pages, API routes and React UI
         ├── lib/                        event ranking and SQLite database
         ├── tests/                      Vitest tests
@@ -170,11 +171,11 @@ You will open each workspace in its own VS Code window, and install the skills t
 
 The skills you will use come from https://wavez.org/[Wavez,window="_blank"]. Wavez is an open source tool from Zenika (Apache 2.0, https://github.com/zenika-open-source/Wavez[source on GitHub,window="_blank"]) that sets your AI assistant up to work the way a good team does: you pick your assistant and the skills you need, and Wavez generates the files that teach it how to write requirements, build prototypes, implement and review code, and run tests.
 
-== 1. Specs: event management (new feature)
+== 1. Get started: run the application
 
-The Programme squad has sent a request: the Events Coordinator wants to add and edit events without an engineer. In this section, you wear the *product manager* hat: you turn the request into a validated specification (PRD) for the developers.
+Before you change anything, you get to know the application the way its users see it: you clone it, run it and explore its listing page.
 
-=== 1.1 Open the product management workspace
+=== 1.1 Clone the repository
 
 * From a terminal window, clone the repository below into your local file system:
 
@@ -183,16 +184,39 @@ The Programme squad has sent a request: the Events Coordinator wants to add and 
 git clone {repo-url}
 ----
 
-* In VS Code, select *File > Open Folder...* and open the `sg-stack-workshop/01-product-management` folder.
-* Open Claude Code: click *✱ Claude Code* in the status bar, at the bottom right of the window. Claude Code opens in a tab in the middle of the window, with the prompt box at the bottom. Sign in with your Claude account if prompted.
+* In VS Code, select *File > Open Folder...* and open the `sg-stack-workshop/02-application/event-listing-service` folder. This is the application workspace: you will come back to it in Sections 3 and 4.
 
-image::images/1a-open-claude-code.png[align="center",width=900]
-* In the prompt box, you will use these in every section:
-** Type `@` followed by a file or folder name to attach it to your message (for example `@data/events-export.csv`).
-** Type `/` to open the command menu: commands and skills are listed there.
-** The prompts in this guide name the skill to use (for example "Use the product-requirements skill to..."), and Claude Code shows when it loads it. If it does not, send the prompt again starting with the skill's command, for example `/product-requirements`.
+=== 1.2 Run the application
 
-=== 1.2 Get the Product and Design skills from Wavez
+* Open the integrated terminal (*Terminal > New Terminal*) and run:
+
+[source,shell]
+----
+node --version
+npm install
+npm test
+----
+
+* `node --version` should show `v24` or later, and the tests should pass.
+* Run `npm run dev` and open http://localhost:3000[window="_blank"]. Keep this terminal running: it is your application terminal.
+
+=== 1.3 Explore the application
+
+* Take a few minutes to check out the listing page: the event cards, the filters and the search.
+
+image::images/listing-page.png[align="center",width=800]
+
+* Keep the application running and this VS Code window open.
+
+== 2. Specs: event management (new feature)
+
+The engineering team receives a request: *the Events Coordinator wants to add and edit events*. In this section, you wear the *Product Manager* hat: you turn the request into a validated specification (PRD).
+
+=== 2.1 Open the product management workspace
+
+* In VS Code, select *File > New Window*, then *File > Open Folder...* and open the `sg-stack-workshop/01-product-management` folder.
+
+=== 2.2 Get the Product and Design skills from Wavez
 
 * Open https://wavez.org/[Wavez,window="_blank"] in your browser.
 * In *01 Assistant* (first row), select *Claude Code*.
@@ -223,15 +247,13 @@ image::images/1b-wavez-generate-product-skills.png[align="center",width=700]
     └── events-export.csv
 ----
 
-The `current-app` folder shows the listing page of the application as it is today: a screenshot, a static copy of its HTML and its stylesheet. Open `listing-page.png` to see the page you will add the new feature to.
+* Check that Claude Code finds the new skills:
+** Open the integrated terminal (*Terminal > New Terminal*) and run `claude`. Sign in with your Claude account if prompted, and confirm that you trust the folder.
+** Type `/`: you should see `/product-requirements` and `/dynamic-prototyping` in the list.
 
-* Start a new conversation and type `/`: you should see `/product-requirements` and `/dynamic-prototyping` in the list.
+=== 2.3 Create the requirements brief
 
-NOTE: If the skills do not appear, the zip was probably unpacked in the wrong folder (for example, inside a new `wavez-setup` subfolder). Move the `.claude` folder directly under `01-product-management` and start a new conversation.
-
-=== 1.3 Create the requirements brief
-
-* Start a new conversation and send:
+* Run `/clear` to start a new conversation and send:
 
 [source,text]
 ----
@@ -268,9 +290,9 @@ STAKEHOLDER NOTES
 
 * Open `01-knowledge/requirements-brief.md` and read the open questions: the `product-requirements` skill will ask you about some of them.
 
-=== 1.4 Create the PRD
+=== 2.4 Create the PRD
 
-* Start a new conversation and send:
+* Run `/clear` to start a new conversation and send:
 
 [source,text]
 ----
@@ -300,11 +322,11 @@ USER STORIES: write stories for the Events Coordinator: add an event, correct an
 
 NOTE: When it finishes, the skill may suggest building static, greyscale mock-ups as the next step. This lab skips them and goes straight to a clickable prototype of the feature, in the next step.
 
-=== 1.5 Build a dynamic prototype
+=== 2.5 Build a dynamic prototype
 
 A PRD is hard to judge on paper. Before handing it to the developers, you test it with a clickable prototype of the current listing page plus the new feature. Problems found now cost a PRD update; found after implementation, they cost code changes.
 
-* Start a new conversation and send:
+* Run `/clear` to start a new conversation and send:
 
 [source,text]
 ----
@@ -377,14 +399,12 @@ When you are done, give me a short list of every assumption you made that the PR
 . Set an embargo date *after* the start date. Is it refused with a message that explains why?
 . Edit "Contract Law for Speakers", change its venue to "Funan Level 7" and save. Does the card show the new venue? Open *Edit* again and press Escape: does the modal close without changes?
 
-=== 1.6 Get feedback and update the PRD (optional)
+=== 2.6 Get feedback and update the PRD
 
 You do not have the Events Coordinator in the room: Claude plays them. A role-play does not replace a real user, but it finds the obvious problems first.
 
-TIP: If you are short of time, skip this step: commit your work (`git add .` then `git commit -m "Event management PRD"`) and go to Section 2.
-
 * Take two screenshots: the listing page with the new buttons, and the modal showing validation messages.
-* Start a new conversation, paste both screenshots into the prompt box and send:
+* Run `/clear`, add both screenshots to your message (copy a screenshot and press *Ctrl+V*, also on macOS, or drag the image file into the terminal) and send:
 
 [source,text]
 ----
@@ -411,7 +431,7 @@ Then save your answers in 01-knowledge/prototype-feedback.md.
 ====
 
 * Ask follow-up questions in the same conversation if needed.
-* Start a new conversation and send:
+* Run `/clear` to start a new conversation and send:
 
 [source,text]
 ----
@@ -436,28 +456,18 @@ Add a "Changes since v1" section at the end of the document.
 * Check that each change in "Changes since v1" traces back to the feedback, an assumption or a test finding.
 * Commit your work (`git add .` then `git commit -m "Event management PRD"`). The PRD is ready for the developers.
 
-== 2. Implementation: event management (new feature)
+== 3. Implementation: event management (new feature)
 
 You now switch hats: you are the developer who implements the PRD with the `backend`, `frontend`, `reviewer`, then `playwright-uat` skills. Each development skill writes a plan in `docs/plans/`, waits for your approval, implements it step by step and ends with a *Handover* block for the next skill.
 
-=== 2.1 Open and run the application
+=== 3.1 Go back to the application
 
-* In VS Code, select *File > New Window*, then *File > Open Folder...* and open the `sg-stack-workshop/02-application/event-listing-service` folder. Keep the product management window open: you will need its PRD in step 2.3.
-* Open the integrated terminal (*Terminal > New Terminal*) and run:
+* Go back to the `event-listing-service` VS Code window from Section 1 (if you closed it, select *File > Open Recent*). Keep the product management window open: you will need its PRD in step 3.3.
+* Check that the application still runs at http://localhost:3000[window="_blank"]. If it does not, run `npm run dev` in the integrated terminal. Keep this terminal running: it is your application terminal. Open a second terminal (`+` icon in the terminal panel) for the other commands.
 
-[source,shell]
-----
-node --version
-npm install
-npm test
-----
+=== 3.2 Get the Development and QA skills from Wavez
 
-* `node --version` should show `v24` or later, and the tests should pass.
-* Run `npm run dev` and open http://localhost:3000[window="_blank"]. Take a few minutes to look at the listing page. Keep this terminal running: it is your application terminal. Open a second terminal (`+` icon in the terminal panel) for the other commands.
-
-=== 2.2 Get the Development and QA skills from Wavez
-
-* Go back to https://wavez.org/[Wavez,window="_blank"] and select *Claude Code* again. Untick any skill still selected from Section 1.
+* Go back to https://wavez.org/[Wavez,window="_blank"] and select *Claude Code* again. Untick any skill still selected from Section 2.
 * Tick the following 4 skills:
 ** *Development*: `Backend`, `Frontend` and `Code review`. Under `Backend`, select *Node.js* (Next.js App Router); under `Frontend`, select *TypeScript* (Next.js App Router): the stack of this application.
 ** *QA*: `UAT with Playwright`
@@ -486,9 +496,9 @@ event-listing-service/
 
 Each skill's `references/architecture.md` holds the rules its plans follow. For the Node.js `backend` skill: route handlers in `app/api/`, business rules in `lib/`, SQLite queries with bound parameters, Vitest tests.
 
-* Open Claude Code in this window (*✱ Claude Code* in the status bar, as in step 1.1), start a new conversation and type `/`: you should see `/backend`, `/frontend`, `/reviewer` and `/playwright-uat` in the list.
+* Open a third terminal (`+` icon in the terminal panel) and run `claude`, as in step 2.2: this is your Claude Code terminal. Type `/`: you should see `/backend`, `/frontend`, `/reviewer` and `/playwright-uat` in the list.
 
-=== 2.3 Hand over the PRD and run a gap analysis
+=== 3.3 Hand over the PRD and run a gap analysis
 
 * Copy the PRD into the application, from your second terminal:
 
@@ -498,9 +508,9 @@ mkdir -p docs/product
 cp ../../01-product-management/02-product-requirements/*.md docs/product/
 ----
 
-TIP: If you did not finish Section 1, copy the reference PRD `event-management-prd.md` provided by your instructor into `docs/product` instead.
+TIP: If you did not finish Section 2, copy the reference PRD `event-management-prd.md` provided by your instructor into `docs/product` instead.
 
-* Start a new conversation, switch to *Plan* mode and send:
+* Run `/clear`, press *Shift+Tab* until *plan mode on* shows below the prompt, and send:
 
 [source,text]
 ----
@@ -515,15 +525,15 @@ Read the PRD in docs/product. For each requirement, tell me in a table whether t
 * *Plan mode:* Claude reads but changes nothing. You see the size of the work, and what already exists, before any code is written.
 ====
 
-* Review the table: it tells you what the rest of this section will change. Switch back to *Auto* mode.
+* Review the table: it tells you what the rest of this section will change. Press *Shift+Tab* until *auto mode on* shows below the prompt.
 
-TIP: In *Auto* mode, Claude edits files and runs commands on its own, and stops only for actions it judges risky. If you prefer to approve every change yourself, choose *Manual* instead: Claude asks before each edit or command and shows you what it wants to do, and you accept or reject it. It is slower, but you see every change as it happens.
+TIP: In auto mode, Claude edits files and runs commands on its own, and stops only for actions it judges risky. If auto mode is not in the cycle, choose *accept edits on*: Claude edits files on its own and asks before running commands. If you prefer to approve every change yourself, press *Shift+Tab* until no mode shows (the default mode): Claude asks before each edit or command and shows you what it wants to do, and you accept or reject it. It is slower, but you see every change as it happens.
 
-=== 2.4 Implement the backend
+=== 3.4 Implement the backend
 
 You start with the server side: the API that reads, creates and updates an event, and applies the validation rules of the PRD. The `backend` skill first writes a plan for you to approve, then implements it and runs the tests.
 
-* Start a new conversation and send:
+* Run `/clear` to start a new conversation and send:
 
 [source,text]
 ----
@@ -555,7 +565,7 @@ The plan is approved. Implement mode: implement it step by step, and stop after 
 * Check that the `### Backend Handover` block shows `PASS`, then run `npm test` in your second terminal.
 * With a curl command from the handover, create an event with no start date. Is it refused with a clear message?
 
-=== 2.5 Implement the frontend
+=== 3.5 Implement the frontend
 
 Next, the screen: the "Add event" and "Edit" buttons and the add / edit modal on the listing page, connected to the API you just built. The `frontend` skill works the same way: plan, approval, then implementation.
 
@@ -580,7 +590,7 @@ Use the frontend skill in Plan mode: produce a Frontend Plan for the event manag
 * Review, approve and implement the plan as you did for the backend.
 * On http://localhost:3000, add an event starting in 3 days from *today*, correct its venue, then try to save it with no start date. Does each step behave as the PRD says?
 
-=== 2.6 Review the changes
+=== 3.6 Review the changes
 
 Before you commit, a second pair of eyes: the `reviewer` skill checks the backend and frontend changes for security and quality issues, and checks that they meet the PRD. It gives a verdict and a list of issues to fix.
 
@@ -603,12 +613,12 @@ NOTE: Do not confuse the `reviewer` skill with Claude Code's built-in `/code-rev
 
 * Read the verdict (🟢 APPROVE, 🟡 REQUEST CHANGES or 🔴 BLOCK). Fix the blocking issues with the `backend` or `frontend` skill, run `npm test`, then commit your changes.
 
-=== 2.7 Run the acceptance tests
+=== 3.7 Run the acceptance tests
 
 Last, you check the feature the way the Events Coordinator will use it: in a browser, against each acceptance criterion of the PRD. The `playwright-uat` skill works in two phases: it first writes a test plan for you to review, then runs it in a real browser and produces a Word (`.docx`) report.
 
 * Make sure that the application is running (`npm run dev` in your application terminal). Do not run `npm test` while the UAT runs: it would reset the database.
-* Start a new conversation and send:
+* Run `/clear` to start a new conversation and send:
 
 [source,text]
 ----
@@ -641,15 +651,15 @@ The test plan is approved. Run UAT on http://localhost:3000 and generate the exe
 * Open `*_Test_Execution_Report.docx` (in `references/`, next to the test plan). If a test fails, ask Claude whether the problem is in the application or in the PRD, and fix it with the right skill.
 * Commit the test plan and the report. You have taken a feature from a request to a tested implementation, congratulations!
 
-== 3. Specs + Implementation: listing page and search (existing feature, optional)
+== 4. Specs + Implementation: listing page and search (existing feature, optional)
 
 The Programme squad reports that attendees find the public listing page confusing, and that its search does not find the events they expect (the full requirement is in the prompt below). This section covers both jobs on a smaller scale: first the spec, then the implementation. Stay in the application workspace.
 
-=== 3.1 Write the spec from the code
+=== 4.1 Write the spec from the code
 
-This step is *product management* work, as in Section 1: the outcome is a spec, not code. For a new feature, the knowledge came from the user and a prototype. For an existing feature, it comes first from the code: Claude reads and explains it, then you decide what must change.
+This step is *product management* work, as in Section 2: the outcome is a spec, not code. For a new feature, the knowledge came from the user and a prototype. For an existing feature, it comes first from the code: Claude reads and explains it, then you decide what must change.
 
-* Start a new conversation and send the prompt below:
+* Run `/clear` to start a new conversation and send the prompt below:
 
 [source,text]
 ----
@@ -681,11 +691,11 @@ Do not change any code.
 ** Is every requirement testable? Each one should be covered by at least one acceptance criterion.
 * Commit the spec: it is now the contract for the change.
 
-=== 3.2 Implement the spec
+=== 4.2 Implement the spec
 
-Back to the developer hat, with the same flow as in Section 2.
+Back to the developer hat, with the same flow as in Section 3.
 
-* Start a new conversation and send:
+* Run `/clear` to start a new conversation and send:
 
 [source,text]
 ----
@@ -738,9 +748,9 @@ Use the reviewer skill to review all uncommitted changes for the listing page, u
 * Fix the blocking issues if any. Open the listing page: is it clearer? Search for the topic `data` and the venue `marina`: do you find the events you expect?
 * Run `npm test`, then commit your changes.
 
-=== 3.3 Test and check for regressions
+=== 4.3 Test and check for regressions
 
-* Restart the application if needed (`npm run dev`). Start a new conversation and send:
+* Restart the application if needed (`npm run dev`). Run `/clear` to start a new conversation and send:
 
 [source,text]
 ----
