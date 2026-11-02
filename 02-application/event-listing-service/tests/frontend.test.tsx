@@ -1,9 +1,9 @@
 import React from 'react';
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { Header } from '../components/Header';
-import { EventCard } from '../components/EventCard';
-import { RankedEvent } from '../lib/types';
+import { Header } from '../frontend/components/Header';
+import { EventCard } from '../frontend/components/EventCard';
+import { RankedEvent } from '../shared/types';
 
 describe('frontend smoke', () => {
   it('Header renders title and summary count chips', () => {

@@ -1,7 +1,7 @@
 'use client';
 
 import React, {useEffect} from 'react';
-import {EventSummary} from '../lib/types';
+import {EventSummary} from '../../shared/types';
 
 interface HeaderProps {
   summary: EventSummary;

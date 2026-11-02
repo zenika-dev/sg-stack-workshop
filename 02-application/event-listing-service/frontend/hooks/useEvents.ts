@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { RankedEvent, EventFilters, EventSummary } from '../lib/types';
+import { fetchEventPage, fetchEventSummary } from '../api';
+import { RankedEvent, EventFilters, EventSummary } from '../../shared/types';
 
 export function useEvents(initialFilters: EventFilters = { view: 'upcoming' }) {
   const [events, setEvents] = useState<RankedEvent[]>([]);
@@ -17,11 +18,8 @@ export function useEvents(initialFilters: EventFilters = { view: 'upcoming' }) {
 
   const fetchSummary = async () => {
     try {
-      const res = await fetch('/api/events/summary');
-      if (res.ok) {
-        const data = await res.json();
-        setSummary(data);
-      }
+      const data = await fetchEventSummary();
+      if (data) setSummary(data);
     } catch {
     }
   };
@@ -35,17 +33,7 @@ export function useEvents(initialFilters: EventFilters = { view: 'upcoming' }) {
 
   useEffect(() => {
     setLoading(true);
-    const params = new URLSearchParams();
-    if (filters.view) params.set('view', filters.view);
-    if (filters.topic) params.set('topic', filters.topic);
-    if (filters.venue) params.set('venue', filters.venue);
-    if (filters.include_archived) params.set('include_archived', 'true');
-
-    fetch(`/api/events?${params.toString()}`)
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to load events');
-        return res.json();
-      })
+    fetchEventPage(filters)
       .then((data) => {
         setEvents(data.items || []);
         setTotal(data.total || 0);

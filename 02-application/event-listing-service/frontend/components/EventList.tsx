@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { RankedEvent } from '../lib/types';
+import { RankedEvent } from '../../shared/types';
 import { EventCard } from './EventCard';
 
 interface EventListProps {

@@ -28,3 +28,8 @@ export interface EventSummary {
   listed: number;
   running: number;
 }
+
+export interface EventPage {
+  total: number;
+  items: RankedEvent[];
+}

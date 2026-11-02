@@ -12,6 +12,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      // server-only throws outside Next's server bundle; neutralise it in tests
+      'server-only': path.resolve(__dirname, './tests/stubs/server-only.ts'),
       '@': path.resolve(__dirname, './'),
     },
   },
