@@ -1,7 +1,7 @@
 # Event Management — Product Requirements Document (reference)
 
-> Reference PRD for participants who could not finish Section 1 (Specs).
-> Copy it into `02-application/event-listing-service/docs/product/` (step 2.3).
+> Reference PRD for participants who could not finish Section 2 (Specs).
+> Copy it into `02-application/event-listing-service/docs/product/` (step 3.3).
 
 ## 1. Context
 
