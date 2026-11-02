@@ -86,7 +86,6 @@ run_asciidoctor \
 
 mkdir -p "$OUTPUT_FOLDER"
 cp "$TARGET/lab-instructions-ai-workshop-sg-stack.html" "$OUTPUT_FOLDER/"
-cp "$SRC/instructions/vscode-getting-started.html" "$OUTPUT_FOLDER/"
 cp -r "$SRC/lab-files" "$OUTPUT_FOLDER/lab-files"
 copy_slides "$HOME/Downloads/slides-ai-workshop-sg-stack.pdf" "$OUTPUT_FOLDER/"
 

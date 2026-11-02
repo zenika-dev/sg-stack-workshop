@@ -37,7 +37,7 @@ cd instructions && ./build.sh
 ./ai-workshop-sg-stack/ai-workshop-sg-stack-build.sh 20261105-govtech
 ```
 
-Output is created in `../ai-workshop-sg-stack-<suffix>/`: the guide, `vscode-getting-started.html`,
+Output is created in `../ai-workshop-sg-stack-<suffix>/`: the guide,
 `lab-files/` and the slides PDF if found in `~/Downloads`.
 
 ## Before a session
