@@ -31,14 +31,13 @@ ai-workshop-sg-stack/
 cd instructions && ./build.sh
 ```
 
-## Building a session package
+## Building the lab instructions
 
 ```bash
-./ai-workshop-sg-stack/ai-workshop-sg-stack-build.sh 20261105-govtech
+./ai-workshop-sg-stack-build.sh
 ```
 
-Output is created in `../ai-workshop-sg-stack-<suffix>/`: the guide,
-`lab-files/` and the slides PDF if found in `~/Downloads`.
+Output: `docs/lab-instructions.html`.
 
 ## Before a session
 

@@ -3,20 +3,12 @@
 set -euo pipefail
 
 # Usage:
-#   ./ai-workshop-sg-stack-build.sh [SUFFIX]
+#   ./ai-workshop-sg-stack-build.sh
 #
-# Arguments:
-#   SUFFIX  - Output folder suffix (default: today's date)
-#
-# Before running the script (optional):
-# - Download the slides PDF to $HOME/Downloads:
-#   - slides-ai-workshop-sg-stack.pdf
+# Builds docs/lab-instructions.html from instructions/ai-workshop-sg-stack.adoc.
 
-SUFFIX="${1:-$(date +%Y%m-%d)}"
 SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(dirname "$SRC")"
-TRAINING="$(dirname "$REPO_ROOT")"
-OUTPUT_FOLDER="$TRAINING/ai-workshop-sg-stack-$SUFFIX"
 TARGET="$REPO_ROOT"
 
 resolve_asciidoctor() {
@@ -66,17 +58,6 @@ run_asciidoctor() {
     -o "$(normalize_asciidoctor_path "$output")"
 }
 
-copy_slides() {
-  local slides="$1"
-  local destination="$2"
-
-  if [[ -f "$slides" ]]; then
-    cp "$slides" "$destination"
-  else
-    echo "Warning: slides PDF not found at $slides, packaging without it." >&2
-  fi
-}
-
 echo "Building AI workshop (sg-stack) HTML..."
 resolve_asciidoctor
 mkdir -p "$TARGET"
@@ -84,10 +65,4 @@ run_asciidoctor \
   "$SRC/instructions/ai-workshop-sg-stack.adoc" \
   "$TARGET/lab-instructions.html"
 
-mkdir -p "$OUTPUT_FOLDER"
-cp "$TARGET/lab-instructions.html" "$OUTPUT_FOLDER/"
-mkdir -p "$OUTPUT_FOLDER/lab-files"
-cp -r "$SRC/lab-files/." "$OUTPUT_FOLDER/lab-files/"
-copy_slides "$HOME/Downloads/slides-ai-workshop-sg-stack.pdf" "$OUTPUT_FOLDER/"
-
-echo "Files generated in: $OUTPUT_FOLDER"
+echo "File generated: $TARGET/lab-instructions.html"
