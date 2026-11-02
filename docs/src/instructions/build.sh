@@ -81,7 +81,5 @@ resolve_asciidoctor
   -D "$(normalize_asciidoctor_path "$OUTPUT_DIR_ABS")" \
   "$(normalize_asciidoctor_path "$INPUT_FILE")"
 
-cp "$INPUT_DIR/vscode-getting-started.html" "$OUTPUT_DIR_ABS/vscode-getting-started.html"
-
 BASENAME=$(basename "$INPUT_FILE" .adoc)
 open_html "$OUTPUT_DIR/$BASENAME.html"

@@ -20,7 +20,7 @@ Section 1's prototype adds the feature to the current listing page, rebuilt from
 ai-workshop-sg-stack/
 ├── ai-workshop-sg-stack-build.sh     # Builds the guide and the session package
 ├── instructions/                     # ai-workshop-sg-stack.adoc, build.sh, docinfo.html,
-│                                     # vscode-getting-started.html, images/ (incl. Wavez screenshots)
+│                                     # images/ (incl. Wavez screenshots)
 └── lab-files/
     └── event-management-prd.md       # Reference PRD: fallback if Section 1 is not finished
 ```
