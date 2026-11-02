@@ -793,3 +793,12 @@ The test plan is approved. Run UAT on http://localhost:3000 for this plan and fo
 ====
 
 * Open both reports. Once all the acceptance criteria pass, commit: you have changed an existing feature without breaking the new one, congratulations!
+
+== 5. Conclusion
+
+Good job, you have completed this lab!
+
+As a bonus, if you are interested in going further, here are a few things you could explore:
+
+* Choose an old application such as https://github.com/gothinkster/spring-boot-realworld-example-app[spring-boot-realworld-example-app,window="_blank"] and practice migrating it to the latest versions of the frameworks it uses. Use the *Wavez Tech Migration* skill for that.
+* Create an *architecture diagram* of an application, using the *Wavez* skill for that.
