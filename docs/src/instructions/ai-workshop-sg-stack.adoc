@@ -631,6 +631,8 @@ NOTE: Do not confuse the `reviewer` skill with Claude Code's built-in `/code-rev
 
 Last, you check the feature the way the Events Coordinator will use it: in a browser, against each acceptance criterion of the PRD. The `playwright-uat` skill works in two phases: it first writes a test plan for you to review, then runs it in a real browser and produces a Word (`.docx`) report.
 
+NOTE: To run Playwright exploratory testing, where Claude freely browses and probes the application beyond the scripted test cases, you need to use the Playwright MCP server.
+
 * Make sure that the application is running (`npm run dev` in your application terminal). Do not run `npm test` while the UAT runs: it would reset the database.
 * Run `/clear` to start a new conversation and send:
 
