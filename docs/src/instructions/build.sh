@@ -76,8 +76,7 @@ resolve_asciidoctor
   --trace \
   -v \
   -B "$(normalize_asciidoctor_path "$INPUT_DIR")" \
-  -D "$(normalize_asciidoctor_path "$OUTPUT_DIR_ABS")" \
+  -o "$(normalize_asciidoctor_path "$OUTPUT_DIR_ABS/lab-instructions.html")" \
   "$(normalize_asciidoctor_path "$INPUT_FILE")"
 
-BASENAME=$(basename "$INPUT_FILE" .adoc)
-open_html "$OUTPUT_DIR_ABS/$BASENAME.html"
+open_html "$OUTPUT_DIR_ABS/lab-instructions.html"

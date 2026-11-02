@@ -82,10 +82,10 @@ resolve_asciidoctor
 mkdir -p "$TARGET"
 run_asciidoctor \
   "$SRC/instructions/ai-workshop-sg-stack.adoc" \
-  "$TARGET/lab-instructions-ai-workshop-sg-stack.html"
+  "$TARGET/lab-instructions.html"
 
 mkdir -p "$OUTPUT_FOLDER"
-cp "$TARGET/lab-instructions-ai-workshop-sg-stack.html" "$OUTPUT_FOLDER/"
+cp "$TARGET/lab-instructions.html" "$OUTPUT_FOLDER/"
 cp -r "$SRC/lab-files" "$OUTPUT_FOLDER/lab-files"
 copy_slides "$HOME/Downloads/slides-ai-workshop-sg-stack.pdf" "$OUTPUT_FOLDER/"
 
