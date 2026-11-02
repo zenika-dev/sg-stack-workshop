@@ -4,7 +4,6 @@ set -euo pipefail
 
 INPUT="${1:-}"
 DEFAULT_INPUT="ai-workshop-sg-stack.adoc"
-OUTPUT_DIR="target"
 
 if [[ -z "$INPUT" || ! -f "$INPUT" ]]; then
   INPUT="$DEFAULT_INPUT"
@@ -17,7 +16,7 @@ fi
 
 INPUT_DIR="$(cd "$(dirname "$INPUT")" && pwd)"
 INPUT_FILE="$INPUT_DIR/$(basename "$INPUT")"
-OUTPUT_DIR_ABS="$(pwd)/$OUTPUT_DIR"
+OUTPUT_DIR_ABS="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 resolve_asciidoctor() {
   if command -v asciidoctor >/dev/null 2>&1; then
@@ -71,7 +70,6 @@ open_html() {
   fi
 }
 
-mkdir -p "$OUTPUT_DIR"
 resolve_asciidoctor
 "${ASCIIDOCTOR_CMD[@]}" \
   --safe-mode unsafe \
@@ -82,4 +80,4 @@ resolve_asciidoctor
   "$(normalize_asciidoctor_path "$INPUT_FILE")"
 
 BASENAME=$(basename "$INPUT_FILE" .adoc)
-open_html "$OUTPUT_DIR/$BASENAME.html"
+open_html "$OUTPUT_DIR_ABS/$BASENAME.html"
