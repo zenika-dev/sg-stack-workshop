@@ -555,6 +555,7 @@ Use the backend skill in Plan mode: produce a Feature Plan for the event managem
 - every field of the modal must be saved: title, kind, status, start date and time, topics, venue, embargoed until, archived
 - the existing listing and ranking must keep working unchanged
 - the testing plan must cover each acceptance criterion of the PRD
+- write the plan in docs/plans/ of the current directory
 ----
 
 [.why]
