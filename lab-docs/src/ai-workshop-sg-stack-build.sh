@@ -5,7 +5,7 @@ set -euo pipefail
 # Usage:
 #   ./ai-workshop-sg-stack-build.sh
 #
-# Builds docs/lab-instructions.html from instructions/ai-workshop-sg-stack.adoc.
+# Builds lab-docs/lab-instructions.html from instructions/ai-workshop-sg-stack.adoc.
 
 SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(dirname "$SRC")"

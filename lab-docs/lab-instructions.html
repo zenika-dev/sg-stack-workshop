@@ -2212,20 +2212,13 @@ Add a "Changes since v1" section at the end of the document.</code></pre>
 <div class="paragraph">
 <p>Each skill&#8217;s <code>references/architecture.md</code> holds the rules its plans follow.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Open a second terminal (<code>+</code> icon in the terminal panel) and run <code>claude</code>, as in step 2.2: this is your Claude Code terminal. Make sure it is in the <code>event-listing-service</code> folder, otherwise the skills will not appear. Type <code>/</code>: you should see <code>/backend</code>, <code>/frontend</code>, <code>/reviewer</code> and <code>/playwright-uat</code> in the list.</p>
-</li>
-</ul>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_3_3_hand_over_the_prd_and_run_a_gap_analysis">3.3 Hand over the PRD and run a gap analysis</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Open a third terminal (<code>+</code> icon in the terminal panel) for the other commands, and copy the PRD into the application:</p>
+<p>Open a new terminal (<strong>Ctrl+Shift+&#96;</strong>) and copy the PRD into the application:</p>
 </li>
 </ul>
 </div>
@@ -2238,7 +2231,7 @@ cp ../../01-product-management/02-product-requirements/*.md docs/product/</code>
 <div class="ulist">
 <ul>
 <li>
-<p>Run <code>/clear</code>, press <strong>Shift+Tab</strong> until <strong>plan mode on</strong> shows below the prompt, and send:</p>
+<p>Switch to Claude CLI with <code>claude</code> command, then press <strong>Shift+Tab</strong> until <strong>plan mode on</strong> shows below the prompt, and send:</p>
 </li>
 </ul>
 </div>
@@ -2344,7 +2337,7 @@ In auto mode, Claude edits files and runs commands on its own, and stops only fo
 <div class="ulist">
 <ul>
 <li>
-<p>Check that the <code><mark>#</mark> Backend Handover</code> block shows <code>PASS</code>, then run <code>npm test</code> in your third terminal.</p>
+<p>Check that the <code><mark>#</mark> Backend Handover</code> block shows <code>PASS</code>, then run <code>npm test</code> in the new terminal.</p>
 </li>
 <li>
 <p>With a curl command from the handover, create an event with no start date. Is it refused with a clear message?</p>
@@ -2822,7 +2815,7 @@ Do not change any code.</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-02 17:25:12 +0800
+Last updated 2026-11-03 11:05:42 +0800
 </div>
 </div>
 </body>
