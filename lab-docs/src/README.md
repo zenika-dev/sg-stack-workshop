@@ -38,7 +38,7 @@ cd instructions && ./build.sh
 ./ai-workshop-sg-stack-build.sh
 ```
 
-Output: `docs/lab-instructions.html`.
+Output: `lab-docs/lab-instructions.html`.
 
 ## Before a session
 
